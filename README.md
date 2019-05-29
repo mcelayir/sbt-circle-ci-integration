@@ -1,6 +1,45 @@
-# Introduction
+# Overview
 
-Tutorial to integrate your sbt project with circleci.
+This tutorial is intended to give brief information about <b>circleci</b>, integrating
+<b>circleci</b> with your scala project to automate and orchestrate your builds.
+
+# CircleCi
+
+## What is continuous integration (CI)
+
+Continuous integration (CI) is a practice that requires developers to commit
+and integrate their codes into a central repository. Instead of building
+and verifying the integrity in an isolated system, the integrated code built
+and verified by each commit. This allows teams to detect problems and take
+actions early.
+
+## What is CircleCi
+
+As you can guess from the context, <b>circleci</b> is yet another CI service that
+you can make use of. 
+
+With <b>circleci</b> you can utilize CI in your development process easily. As you will
+later see in this tutorial, you can spin up everything with a simple yml file.
+You can configure workflows and orchestrate them in various ways depending
+on your requirements. In a nutshell you can do:
+
+<ul>
+    <li> Compile and test your code </li>
+    <li> Schedule your jobs </li>
+    <li> Create custom workflows and pipelines </li>
+    <li> Orchestrate your jobs </li>
+</ul> 
+
+Key features for <b>circleci</b> can be described as:
+<ul>
+    <li> No dedicated servers and administration needed </li>
+    <li> Has a free plan </li>
+    <li> Nice cli to run tasks locally </li>
+    <li> Rest api to access projects, builds and artifacts </li>
+    <li> Easy configuration </li>
+    <li> VCS integration </li>
+    <li> Community support </li>
+</ul> 
 
 # Configuration
 
@@ -504,4 +543,12 @@ and docker image is published.
      alt="Docker hub"
      style="float: left; margin-right: 10px;" />
      
-     
+
+# References
+
+- https://www.thoughtworks.com/continuous-integration
+- https://circleci.com/docs/2.0/about-circleci/
+- https://hackernoon.com/continuous-integration-circleci-vs-travis-ci-vs-jenkins-41a1c2bd95f5
+- https://circleci.com/docs/2.0/language-scala/
+- https://circleci.com/docs/2.0/tutorials/
+
