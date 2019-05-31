@@ -21,6 +21,12 @@ jobs:
     - run:
         name: Compile
         command: sbt compile
+    - persist_to_workspace:
+        root: /root
+        paths:
+        - .ivy2/cache
+        - .sbt
+        - .m2
   test:
     docker:
     - image: openjdk:8
@@ -35,6 +41,8 @@ jobs:
           dpkg -i sbt-$SBT_VERSION.deb
           rm sbt-$SBT_VERSION.deb
     - checkout
+    - attach_workspace:
+        at: /root
     - run:
         name: Test
         command: sbt test
@@ -64,6 +72,8 @@ jobs:
         name: Docker login
         command: docker login -u $DOCKER_USER -p $DOCKER_PASS
     - checkout
+    - attach_workspace:
+        at: /root
     - run:
         name: Publish
         command: sbt docker:publish
