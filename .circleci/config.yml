@@ -3,17 +3,8 @@ version: 2
 jobs:
   compile:
     docker:
-    - image: openjdk:8
-    environment:
-    - SBT_VERSION: 1.2.8
+    - image: mcelayir/sbt-jdk:latest
     steps:
-    - run:
-        name: Get sbt binary
-        command: |
-          apt update && apt install -y curl
-          curl -L -o sbt-$SBT_VERSION.deb https://dl.bintray.com/sbt/debian/sbt-$SBT_VERSION.deb
-          dpkg -i sbt-$SBT_VERSION.deb
-          rm sbt-$SBT_VERSION.deb
     - restore_cache:
         key: sbt-cache
     - checkout
@@ -31,17 +22,8 @@ jobs:
         - "~/.m2"
   test:
     docker:
-    - image: openjdk:8
-    environment:
-    - SBT_VERSION: 1.2.8
+    - image: mcelayir/sbt-jdk:latest
     steps:
-    - run:
-        name: Get sbt binary
-        command: |
-          apt update && apt install -y curl
-          curl -L -o sbt-$SBT_VERSION.deb https://dl.bintray.com/sbt/debian/sbt-$SBT_VERSION.deb
-          dpkg -i sbt-$SBT_VERSION.deb
-          rm sbt-$SBT_VERSION.deb
     - restore_cache:
         key: sbt-cache
     - checkout
@@ -50,26 +32,9 @@ jobs:
         command: sbt test
   publish:
     docker:
-    - image: openjdk:8
-    environment:
-    - SBT_VERSION: 1.2.8
+    - image: mcelayir/sbt-jdk:latest
     steps:
-    - run:
-        name: Get sbt binary
-        command: |
-          apt update && apt install -y curl
-          curl -L -o sbt-$SBT_VERSION.deb https://dl.bintray.com/sbt/debian/sbt-$SBT_VERSION.deb
-          dpkg -i sbt-$SBT_VERSION.deb
-          rm sbt-$SBT_VERSION.deb
     - setup_remote_docker
-    - run:
-        name: Install Docker client
-        command: |
-          set -x
-          VER="17.03.0-ce"
-          curl -L -o /tmp/docker-$VER.tgz https://get.docker.com/builds/Linux/x86_64/docker-$VER.tgz
-          tar -xz -C /tmp -f /tmp/docker-$VER.tgz
-          mv /tmp/docker/* /usr/bin
     - run:
         name: Docker login
         command: docker login -u $DOCKER_USER -p $DOCKER_PASS
@@ -79,7 +44,6 @@ jobs:
     - run:
         name: Publish
         command: sbt docker:publish
-
 
 workflows:
   version: 2
